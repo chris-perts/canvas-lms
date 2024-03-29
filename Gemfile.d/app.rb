@@ -19,6 +19,12 @@
 
 # NOTE: Indented gems are meant to indicate optional dependencies of parent gems
 
+# Added by PERTS
+
+gem "firebase-admin-sdk", "0.3.1"
+
+# In canvas pre-fork:
+
 gem "bootsnap", "~> 1.16", require: false
 gem "rails", ($canvas_rails == "7.1") ? "~> 7.1.3" : "~> 7.0.4"
   gem "rack", "~> 3.0" if $canvas_rails == "7.1" # needed to force Rack 3 due to a confluence of dependencies involving pact

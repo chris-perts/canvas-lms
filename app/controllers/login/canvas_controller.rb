@@ -36,6 +36,15 @@ class Login::CanvasController < ApplicationController
     flash.now[:notice] = t("Your password has been changed.") if params[:password_changed] == "1"
     @include_recaptcha = recaptcha_enabled?(failsafe: false)
 
+    Rails.logger.info("~~~~~~ logging on page")
+    if params[:id_token].present?
+      Rails.logger.info("~~~~~~ id_token is #{params[:id_token]}")
+      app = Firebase::Admin::App.new()
+      verifier = Firebase::Admin::Auth::IDTokenVerifier.new(app)
+      decoded_token = verifier.verify(params[:id_token])
+      Rails.logger.info("~~~~~~ decoded token is #{decoded_token}")
+    end
+
     maybe_render_mobile_login
   end
 
